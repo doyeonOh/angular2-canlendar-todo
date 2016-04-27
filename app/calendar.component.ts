@@ -14,7 +14,7 @@ import { TodoService } from './todo.service';
         <h3>{{year}} / {{month}}</h3>
         <a style="cursor:pointer;" (click)="moveToPrevMonth(getCurrentDate())">left</a> <a style="cursor:pointer;" (click)="moveToNextMonth(getCurrentDate())">right</a>
       </div>
-      <my-month-box [currentDate]="getCurrentDate()" [monthArr]="monthArr" ></my-month-box>
+      <my-month-box [monthArr]="monthArr" ></my-month-box>
     </div>
   `,
   directives: [

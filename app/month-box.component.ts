@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from 'angular2/core';
 
+import { CalendarService } from './calendar.service';
 import { DayBoxComponent } from './day-box.component';
 import { TODOS } from './mock-todo';
 
@@ -19,7 +20,7 @@ import { TODOS } from './mock-todo';
         <ul *ngFor="#week of monthArr">
           <li *ngFor="#day of week" class="day" [class.today]="currentDay == day">
             <span class="day" [class.day_sun]="week[0] == day" [class.day_sat]="week[6] == day">{{day}}</span>
-            <my-day-box [date]=getCurrentDate(day) [showColor]="true"></my-day-box>
+            <my-day-box [date]=getDate(day) [showColor]="true"></my-day-box>
           </li>
         </ul>
       </div>
@@ -61,25 +62,23 @@ export class MonthBoxComponent implements OnInit{
 
   @Input()
   monthArr: number[][];
-  @Input()
-  currentDate : Date;
 
   currentDay: number;
 
+  constructor(
+    private _calendarService: CalendarService
+  ) {}
 
-  getTodoList(day:number){
-    return TODOS.filter(item => item.yyyymmdd.slice(6) == day+"");
-
-  }
   ngOnInit(){
     this.currentDay = 100; //test 임시로..
   }
 
-  getCurrentDate(day:number){
-    // number 가 아닌 값이 들어옴 달력의 빈칸들(monthArr 의 빈값들) 
+  getDate(day:number){
+    // number 가 아닌 값이 들어옴 달력의 빈칸들(monthArr 의 빈값들)
     if(typeof day == "number"){
-      this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
-      return this.currentDate;
+      var date = this._calendarService.getCurrentDate();
+      date = new Date(date.getFullYear(), date.getMonth(), day);
+      return date;
     }
   }
 }

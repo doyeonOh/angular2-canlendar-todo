@@ -10,6 +10,7 @@ export class TodoService {
   }
 
   getTodosByDate(d:Date){
-    return d;
+    if(d != undefined)
+      return TODOS.filter(todo => todo.date.getTime() == d.getTime());
   }
 }

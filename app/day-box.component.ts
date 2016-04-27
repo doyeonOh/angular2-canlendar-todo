@@ -7,7 +7,7 @@ import { Todo } from './todo';
   selector: 'my-day-box',
   template: `
     <div>
-      <my-todo-list [todos]="todos" [showColor]="showColor"></my-todo-list>
+      <my-todo-list [date]="date" [showColor]="showColor"></my-todo-list>
     </div>
   `,
   directives: [TodoListComponent]
@@ -22,6 +22,6 @@ export class DayBoxComponent implements OnInit{
   date: Date;
 
   ngOnInit(){
-    console.log(this.date);
+    // console.log(this.date);
   }
 }

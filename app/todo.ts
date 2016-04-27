@@ -1,6 +1,6 @@
 export class Todo {
   id: number;
-  yyyymmdd: string;
+  date: Date;
   todo: string;
   isComplete: boolean;
 }
