@@ -6,7 +6,7 @@ import { TODOS } from './mock-todo';
 @Component({
   selector: 'my-month-box',
   template: `
-      <div>
+      <div style="display:inline-block;">
         <ul class="subject">
           <li>일</li>
           <li>월</li>
@@ -19,7 +19,7 @@ import { TODOS } from './mock-todo';
         <ul *ngFor="#week of monthArr">
           <li *ngFor="#day of week" class="day" [class.today]="currentDay == day">
             <span class="day" [class.day_sun]="week[0] == day" [class.day_sat]="week[6] == day">{{day}}</span>
-            <my-day-box [todos]="getTodoList(day)" [showColor]="true"></my-day-box>
+            <my-day-box [date]=getCurrentDate(day) [showColor]="true"></my-day-box>
           </li>
         </ul>
       </div>
@@ -62,7 +62,7 @@ export class MonthBoxComponent implements OnInit{
   @Input()
   monthArr: number[][];
   @Input()
-  todayDate : Date;
+  currentDate : Date;
 
   currentDay: number;
 
@@ -73,5 +73,13 @@ export class MonthBoxComponent implements OnInit{
   }
   ngOnInit(){
     this.currentDay = 100; //test 임시로..
+  }
+
+  getCurrentDate(day:number){
+    // number 가 아닌 값이 들어옴 달력의 빈칸들(monthArr 의 빈값들) 
+    if(typeof day == "number"){
+      this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+      return this.currentDate;
+    }
   }
 }

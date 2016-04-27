@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, OnInit } from 'angular2/core';
 
 import { TodoListComponent } from './todo-list.component';
 import { Todo } from './todo';
@@ -13,10 +13,15 @@ import { Todo } from './todo';
   directives: [TodoListComponent]
 })
 
-export class DayBoxComponent {
+export class DayBoxComponent implements OnInit{
   @Input()
   todos : Todo[];
   @Input()
   showColor : boolean;
+  @Input()
+  date: Date;
 
+  ngOnInit(){
+    console.log(this.date);
+  }
 }

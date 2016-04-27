@@ -1,11 +1,13 @@
 import { Injectable } from 'angular2/core';
-import { Todo } from './todo';
-import { TODOS } from './mock-todo';
+
 
 @Injectable()
 export class CalendarService {
   weekDay: number = 7;
   monthArr: number[][];
+
+  currentDate: Date;
+
 
   getToday() {
     return new Date();
@@ -25,8 +27,8 @@ export class CalendarService {
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
     var date = d.getDate();
-    var startDayOfWeek = d.getDay();
-    var endDate = new Date(year, month, 0).getDate();
+    var startDayOfWeek = new Date(year, month - 1, 1).getDay(); // 1일의 요일 반환
+    var endDate = new Date(year, month, 0).getDate(); // 마지막 일의 요일 반환 ( 0 으로 넣으면 전달의 마지막 날 나옴)
 
     var totalWeekOfMonth = this.getTotalWeekOfMonth(endDate, startDayOfWeek);
 
@@ -40,6 +42,8 @@ export class CalendarService {
         if(!(i == 0 && startDayOfWeek > j || startDate > endDate)){
           monthArr[i][j] = startDate;
           startDate++;
+        }else{
+          monthArr[i][j] = "";     // 달력 마지막 주의 빈 공간 채우기 위해서;
         }
       }
     }
@@ -47,5 +51,27 @@ export class CalendarService {
     this.monthArr = monthArr;
 
     return monthArr;
+  }
+
+  getPrevMonthDate(d:Date){
+    var prevMonthDate = d;
+    prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+    this.currentDate = prevMonthDate;
+    return prevMonthDate;
+  }
+
+  getNextMonthDate(d:Date){
+    var nextMonthDate = d;
+    nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+    this.currentDate = nextMonthDate;
+    return nextMonthDate;
+  }
+
+  getCurrentDate(){
+    return this.currentDate;
+  }
+
+  setCurrentDate(d:Date){
+    this.currentDate = d;
   }
 }

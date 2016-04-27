@@ -2,16 +2,20 @@ import { Component, Input, OnInit } from 'angular2/core';
 
 import { MonthBoxComponent } from './month-box.component';
 import { CalendarService } from './calendar.service';
+import { TodoService } from './todo.service';
 
 
 @Component({
   selector: 'my-calendar',
   template: `
     <span> This is my Calendar!</span>
-    <div>
-      <h3>{{year}} / {{month}}</h3>
+    <div style="text-align:center;">
+      <div>
+        <h3>{{year}} / {{month}}</h3>
+        <a style="cursor:pointer;" (click)="moveToPrevMonth(getCurrentDate())">left</a> <a style="cursor:pointer;" (click)="moveToNextMonth(getCurrentDate())">right</a>
+      </div>
+      <my-month-box [currentDate]="getCurrentDate()" [monthArr]="monthArr" ></my-month-box>
     </div>
-    <my-month-box [todayDate]="todayDate" [monthArr]="monthArr" ></my-month-box>
   `,
   directives: [
     MonthBoxComponent
@@ -24,31 +28,52 @@ import { CalendarService } from './calendar.service';
 
 export class CalendarComponent implements OnInit{
 
+
+
   monthArr : number[][];
   todayDate : Date;
+  currentDate : Date;
 
   year: number;
   month: number;
-  date: number;
+  day: number;
 
   constructor(
-    private _calendarService: CalendarService
+    private _calendarService: CalendarService,
+    private _todoService: TodoService
   ) {}
 
-  getToday(){
+  getTodayDate(){
     return this._calendarService.getToday();
   }
 
-  getMonth(d:Date){
-    return this._calendarService.getMonthArray(d);
+  setCurrentDate(d:Date){
+    this._calendarService.setCurrentDate(d);
+  }
+
+  setCalendar(d:Date){
+    this.monthArr     = this._calendarService.getMonthArray(d);
+    this.year         = d.getFullYear();
+    this.month        = d.getMonth() + 1;
+    this.day          = d.getDate();
+  }
+
+  moveToPrevMonth(d:Date){
+    this.setCalendar(this._calendarService.getPrevMonthDate(d));
+  }
+
+  moveToNextMonth(d:Date){
+    this.setCalendar(this._calendarService.getNextMonthDate(d));
+  }
+
+  getCurrentDate(){
+    return this._calendarService.getCurrentDate();
   }
 
   ngOnInit(){
-    this.todayDate =  this.getToday();
-    this.monthArr = this.getMonth(new Date());
-    this.year = this.todayDate.getFullYear();
-    this.month = this.todayDate.getMonth() + 1;
-    this.date = this.todayDate.getDate();
+    this.todayDate =  this.getTodayDate();
+    this.setCalendar(this.todayDate);
+    this.setCurrentDate(this.todayDate);
   }
 
 }
