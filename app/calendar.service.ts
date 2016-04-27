@@ -36,9 +36,9 @@ export class CalendarService {
 
     var monthArr = [];
 
-    for(var i = 0; i < totalWeekOfMonth; i++){
+    for(let i = 0; i < totalWeekOfMonth; i++){
       monthArr[i] = [];
-      for(var j = 0; j < this.weekDay; j++){
+      for(let j = 0; j < this.weekDay; j++){
         if(!(i == 0 && startDayOfWeek > j || startDate > endDate)){
           monthArr[i][j] = startDate;
           startDate++;
@@ -73,5 +73,12 @@ export class CalendarService {
 
   setCurrentDate(d:Date){
     this.currentDate = d;
+  }
+
+  isSameDate(d1:Date, d2:Date){
+    var tmpDate1 = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate());
+    var tmpDate2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate());
+
+    return tmpDate1.getTime() == tmpDate2.getTime();
   }
 }

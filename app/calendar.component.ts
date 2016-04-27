@@ -27,9 +27,6 @@ import { TodoService } from './todo.service';
 
 
 export class CalendarComponent implements OnInit{
-
-
-
   monthArr : number[][];
   todayDate : Date;
   currentDate : Date;

@@ -19,7 +19,10 @@ import { TODOS } from './mock-todo';
         </ul>
         <ul *ngFor="#week of monthArr">
           <li *ngFor="#day of week" class="day" [class.today]="currentDay == day">
-            <span class="day" [class.day_sun]="week[0] == day" [class.day_sat]="week[6] == day">{{day}}</span>
+            <span class="day"
+              [class.day_sun]="week[0] == day"
+              [class.day_sat]="week[6] == day"
+              [class.today]="isToday(day)">{{day}}</span>
             <my-day-box [date]=getDate(day) [showColor]="true"></my-day-box>
           </li>
         </ul>
@@ -79,6 +82,16 @@ export class MonthBoxComponent implements OnInit{
       var date = this._calendarService.getCurrentDate();
       date = new Date(date.getFullYear(), date.getMonth(), day);
       return date;
+    }
+  }
+
+  isToday(day:number){
+    if(typeof day == "number"){
+      var date = this._calendarService.getCurrentDate();
+      var todayDate = this._calendarService.getToday();
+      date = new Date(date.getFullYear(), date.getMonth(), day);
+
+      return this._calendarService.isSameDate(date, todayDate);
     }
   }
 }

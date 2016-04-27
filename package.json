@@ -14,17 +14,20 @@
   "license": "ISC",
   "dependencies": {
     "angular2": "2.0.0-beta.15",
-    "systemjs": "0.19.26",
+    "bootstrap": "git://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
     "es6-shim": "^0.35.0",
+    "font-awesome": "^4.6.1",
+    "fuel-ui": "^0.1.8",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.26",
     "zone.js": "0.6.10"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
     "lite-server": "^2.2.0",
     "typescript": "^1.8.10",
-    "typings":"^0.7.12"
+    "typings": "^0.7.12"
   },
   "bugs": {
     "url": "https://github.com/doyeonOh/angular2-canlendar-todo/issues"

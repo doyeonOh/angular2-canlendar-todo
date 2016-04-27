@@ -7,7 +7,10 @@ import { Todo } from './todo';
   selector: 'my-day-box',
   template: `
     <div>
-      <my-todo-list [date]="date" [showColor]="showColor"></my-todo-list>
+      <my-todo-list
+        [date]="date"
+        [showColor]="showColor">
+      </my-todo-list>
     </div>
   `,
   directives: [TodoListComponent]
