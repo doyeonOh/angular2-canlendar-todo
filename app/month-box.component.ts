@@ -2,12 +2,13 @@ import { Component, OnInit, Input } from 'angular2/core';
 
 import { CalendarService } from './calendar.service';
 import { DayBoxComponent } from './day-box.component';
+import { MyModalComponent } from './my-modal.component';
 import { TODOS } from './mock-todo';
 
 @Component({
   selector: 'my-month-box',
   template: `
-      <div style="display:inline-block;">
+      <div style="display:inline-block;" class="month-box">
         <ul class="subject">
           <li>일</li>
           <li>월</li>
@@ -17,8 +18,8 @@ import { TODOS } from './mock-todo';
           <li>금</li>
           <li>토</li>
         </ul>
-        <ul *ngFor="#week of monthArr">
-          <li *ngFor="#day of week" class="day" [class.today]="currentDay == day">
+        <ul *ngFor="#week of monthArr" class="month_body">
+          <li *ngFor="#day of week" class="day" [class.today]="currentDay == day" (click)="day > 0 ? mymodal.showModal() : void">
             <span class="day"
               [class.day_sun]="week[0] == day"
               [class.day_sat]="week[6] == day"
@@ -27,9 +28,10 @@ import { TODOS } from './mock-todo';
           </li>
         </ul>
       </div>
+      <my-modal #mymodal></my-modal>
   `,
   styles:[`
-    li{
+    ul.month_body li{
       float:left;
       width:7em;
       height:7em;
@@ -41,9 +43,14 @@ import { TODOS } from './mock-todo';
       overflow-y:hidden;
     }
     ul.subject li{
+      float:left;
+      width:7em;
       height:2em;
       border: 0px;
       text-align:center;
+    }
+    .day{
+      cursor:pointer;
     }
     .day_sun{
       color:red;
@@ -58,7 +65,7 @@ import { TODOS } from './mock-todo';
       background-color: #CCA3FA !important;
     }
   `],
-  directives: [DayBoxComponent]
+  directives: [DayBoxComponent, MyModalComponent]
 })
 
 export class MonthBoxComponent implements OnInit{

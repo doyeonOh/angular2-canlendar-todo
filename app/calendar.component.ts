@@ -12,7 +12,12 @@ import { TodoService } from './todo.service';
     <div style="text-align:center;">
       <div>
         <h3>{{year}} / {{month}}</h3>
-        <a style="cursor:pointer;" (click)="moveToPrevMonth(getCurrentDate())">left</a> <a style="cursor:pointer;" (click)="moveToNextMonth(getCurrentDate())">right</a>
+        <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
+            <i class="fa fa-chevron-left"></i>before
+        </button>
+        <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
+            after<i class="fa fa-chevron-right"></i>
+        </button>
       </div>
       <my-month-box [monthArr]="monthArr" ></my-month-box>
     </div>
