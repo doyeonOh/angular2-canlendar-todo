@@ -3,10 +3,10 @@ import { Injectable } from 'angular2/core';
 
 @Injectable()
 export class CalendarService {
-  weekDay: number = 7;
-  monthArr: number[][];
+  _weekDay: number = 7;
+  _monthArr: number[][];
 
-  currentDate: Date;
+  _currentDate: Date;
 
 
   getToday() {
@@ -14,8 +14,8 @@ export class CalendarService {
   }
 
   getTotalWeekOfMonth(endDate:number, startDayOfWeek:number){
-    var totalWeek = Math.floor((endDate + startDayOfWeek) / this.weekDay);
-    var adder = (endDate + startDayOfWeek) % this.weekDay;
+    var totalWeek = Math.floor((endDate + startDayOfWeek) / this._weekDay);
+    var adder = (endDate + startDayOfWeek) % this._weekDay;
 
     if(adder > 0)
       totalWeek = totalWeek + 1;
@@ -38,7 +38,7 @@ export class CalendarService {
 
     for(let i = 0; i < totalWeekOfMonth; i++){
       monthArr[i] = [];
-      for(let j = 0; j < this.weekDay; j++){
+      for(let j = 0; j < this._weekDay; j++){
         if(!(i == 0 && startDayOfWeek > j || startDate > endDate)){
           monthArr[i][j] = startDate;
           startDate++;
@@ -48,7 +48,7 @@ export class CalendarService {
       }
     }
 
-    this.monthArr = monthArr;
+    this._monthArr = monthArr;
 
     return monthArr;
   }
@@ -56,23 +56,23 @@ export class CalendarService {
   getPrevMonthDate(d:Date){
     var prevMonthDate = d;
     prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-    this.currentDate = prevMonthDate;
+    this._currentDate = prevMonthDate;
     return prevMonthDate;
   }
 
   getNextMonthDate(d:Date){
     var nextMonthDate = d;
     nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-    this.currentDate = nextMonthDate;
+    this._currentDate = nextMonthDate;
     return nextMonthDate;
   }
 
   getCurrentDate(){
-    return this.currentDate;
+    return this._currentDate;
   }
 
   setCurrentDate(d:Date){
-    this.currentDate = d;
+    this._currentDate = d;
   }
 
   isSameDate(d1:Date, d2:Date){

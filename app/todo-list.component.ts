@@ -8,9 +8,10 @@ import { Todo } from './todo';
   selector: 'my-todo-list',
   template: `
     <ul style="padding:0;">
-      <li *ngFor="#todo of todos" >
+      <li *ngFor="#todo of _todos" >
         <my-todo [todo]= "todo" [showColor]="showColor" > </my-todo>
       </li>
+      <span *ngIf="showColor == false && _todos.length == 0">Todo가 없습니다</span>
     </ul>
   `,
 
@@ -25,14 +26,21 @@ export class TodoListComponent implements OnInit{
   @Input()
   showColor : boolean;
 
+  _todos : Todo[];
+
   constructor(
     private _todoService: TodoService
   ) {}
 
-  todos : Todo[];
+
+  refresh(date:Date, showColor:boolean){
+    this.date = date;
+    this.showColor = showColor;
+    this._todos = this._todoService.getTodosByDate(this.date);
+  }
 
   ngOnInit(){
-    this.todos = this._todoService.getTodosByDate(this.date);
+    this._todos = this._todoService.getTodosByDate(this.date);
   }
 
 

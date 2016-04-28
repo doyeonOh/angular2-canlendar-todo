@@ -11,7 +11,7 @@ import { TodoService } from './todo.service';
     <span> This is my Calendar!</span>
     <div style="text-align:center;">
       <div>
-        <h3>{{year}} / {{month}}</h3>
+        <h3>{{_year}} / {{_month}}</h3>
         <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
             <i class="fa fa-chevron-left"></i>before
         </button>
@@ -19,7 +19,7 @@ import { TodoService } from './todo.service';
             after<i class="fa fa-chevron-right"></i>
         </button>
       </div>
-      <my-month-box [monthArr]="monthArr" ></my-month-box>
+      <my-month-box [monthArr]="_monthArr" ></my-month-box>
     </div>
   `,
   directives: [
@@ -32,13 +32,13 @@ import { TodoService } from './todo.service';
 
 
 export class CalendarComponent implements OnInit{
-  monthArr : number[][];
-  todayDate : Date;
-  currentDate : Date;
+  _monthArr : number[][];
+  _todayDate : Date;
+  _currentDate : Date;
 
-  year: number;
-  month: number;
-  day: number;
+  _year: number;
+  _month: number;
+  _day: number;
 
   constructor(
     private _calendarService: CalendarService,
@@ -54,10 +54,10 @@ export class CalendarComponent implements OnInit{
   }
 
   setCalendar(d:Date){
-    this.monthArr     = this._calendarService.getMonthArray(d);
-    this.year         = d.getFullYear();
-    this.month        = d.getMonth() + 1;
-    this.day          = d.getDate();
+    this._monthArr     = this._calendarService.getMonthArray(d);
+    this._year         = d.getFullYear();
+    this._month        = d.getMonth() + 1;
+    this._day          = d.getDate();
   }
 
   moveToPrevMonth(d:Date){
@@ -73,9 +73,9 @@ export class CalendarComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.todayDate =  this.getTodayDate();
-    this.setCalendar(this.todayDate);
-    this.setCurrentDate(this.todayDate);
+    this._todayDate =  this.getTodayDate();
+    this.setCalendar(this._todayDate);
+    this.setCurrentDate(this._todayDate);
   }
 
 }

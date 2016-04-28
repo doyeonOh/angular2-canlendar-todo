@@ -11,7 +11,7 @@ import { TODOS } from './mock-todo';
 @Component({
   selector: 'my-app',
   template: `
-    <h1>{{title}}</h1>
+    <h1>{{_title}}</h1>
     <my-calendar></my-calendar>
   `,
   directives: [ROUTER_DIRECTIVES, CalendarComponent],
@@ -26,8 +26,8 @@ import { TODOS } from './mock-todo';
 ])
 
 export class AppComponent implements OnInit {
-  title =  'angular2-calendar-todo';
-  sampleTodos : Todo[];
+  _title =  'angular2-calendar-todo';
+  _sampleTodos : Todo[];
 
 
   constructor(

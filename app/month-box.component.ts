@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from 'angular2/core';
+import { Modal } from 'fuel-ui/fuel-ui';
 
+import { TodoService } from './todo.service';
 import { CalendarService } from './calendar.service';
 import { DayBoxComponent } from './day-box.component';
-import { MyModalComponent } from './my-modal.component';
+import { TodoListComponent } from './todo-list.component';
 import { TODOS } from './mock-todo';
+
 
 @Component({
   selector: 'my-month-box',
@@ -19,53 +22,36 @@ import { TODOS } from './mock-todo';
           <li>토</li>
         </ul>
         <ul *ngFor="#week of monthArr" class="month_body">
-          <li *ngFor="#day of week" class="day" [class.today]="currentDay == day" (click)="day > 0 ? mymodal.showModal() : void">
+          <li *ngFor="#day of week" class="day"  (click)="showModal(day,modal,mytodolist)">
             <span class="day"
               [class.day_sun]="week[0] == day"
               [class.day_sat]="week[6] == day"
-              [class.today]="isToday(day)">{{day}}</span>
+              [class.today]="isToday(day)">
+              {{day}}
+            </span>
             <my-day-box [date]=getDate(day) [showColor]="true"></my-day-box>
           </li>
         </ul>
       </div>
-      <my-modal #mymodal></my-modal>
+      <modal #modal
+          modalTitle="Modal Title"
+          [closeButton]="true"
+          [closeOnUnfocus]="true" style="text-align:initial;">
+          <div class="modal-body" >
+              <my-todo-list #mytodolist>
+                [(date)]="_date"
+                [showColor]="false"
+              </my-todo-list>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="modal.closeModal()">
+                  <i class="fa fa-chevron-left"></i> Go Back
+              </button>
+          </div>
+      </modal>
   `,
-  styles:[`
-    ul.month_body li{
-      float:left;
-      width:7em;
-      height:7em;
-      border: 1px dotted black;
-      text-overflow: ellipsis;
-      word-wrap:normal;
-      white-space: nowrap;
-      overflow: hidden;
-      overflow-y:hidden;
-    }
-    ul.subject li{
-      float:left;
-      width:7em;
-      height:2em;
-      border: 0px;
-      text-align:center;
-    }
-    .day{
-      cursor:pointer;
-    }
-    .day_sun{
-      color:red;
-    }
-    .day_sat{
-      color:blue;
-    }
-    .day:hover{
-      background-color: #BBD8DC !important;
-    }
-    .today{
-      background-color: #CCA3FA !important;
-    }
-  `],
-  directives: [DayBoxComponent, MyModalComponent]
+  styleUrls: ['app/month-box.component.css'],
+  directives: [DayBoxComponent, Modal, TodoListComponent]
 })
 
 export class MonthBoxComponent implements OnInit{
@@ -73,14 +59,30 @@ export class MonthBoxComponent implements OnInit{
   @Input()
   monthArr: number[][];
 
-  currentDay: number;
+  _date: Date;
 
   constructor(
-    private _calendarService: CalendarService
+    private _calendarService: CalendarService,
+    private _todoService: TodoService
   ) {}
 
   ngOnInit(){
-    this.currentDay = 100; //test 임시로..
+
+  }
+
+  showModal(day:number, modal:any, mytodolist:any){
+    console.log(modal);
+    this._date = this.getDate(day);
+    modal.modalTitle = this.getModalTitle();
+    mytodolist.refresh(this._date, false);
+    return day > 0 ? modal.showModal() : '';
+  }
+
+  getModalTitle(){
+    var year  = this._date.getFullYear();
+    var month = this._date.getMonth() +1;
+    var day   = this._date.getDate();
+    return year +"/" + month + "/" + day + " Todo List!";
   }
 
   getDate(day:number){

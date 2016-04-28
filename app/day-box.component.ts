@@ -18,8 +18,6 @@ import { Todo } from './todo';
 
 export class DayBoxComponent implements OnInit{
   @Input()
-  todos : Todo[];
-  @Input()
   showColor : boolean;
   @Input()
   date: Date;

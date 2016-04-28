@@ -1,0 +1,33 @@
+ul.month_body li{
+  float:left;
+  width:7em;
+  height:7em;
+  border: 1px dotted black;
+  text-overflow: ellipsis;
+  word-wrap:normal;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-y:hidden;
+}
+ul.subject li{
+  float:left;
+  width:7em;
+  height:2em;
+  border: 0px;
+  text-align:center;
+}
+.day{
+  cursor:pointer;
+}
+.day_sun{
+  color:red;
+}
+.day_sat{
+  color:blue;
+}
+.day:hover{
+  background-color: #BBD8DC !important;
+}
+.today{
+  background-color: #CCA3FA !important;
+}
