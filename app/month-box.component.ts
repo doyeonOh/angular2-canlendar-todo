@@ -71,7 +71,6 @@ export class MonthBoxComponent implements OnInit{
   }
 
   showModal(day:number, modal:any, mytodolist:any){
-    console.log(modal);
     this._date = this.getDate(day);
     modal.modalTitle = this.getModalTitle();
     mytodolist.refresh(this._date, false);
