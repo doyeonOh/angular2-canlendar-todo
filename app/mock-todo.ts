@@ -16,5 +16,13 @@ export var TODOS: Todo[] = [
     {"id": 23, "date": new Date(2016, 3, 27), "todo": "기타치기", "isComplete": false},
     {"id": 24, "date": new Date(2016, 3, 27), "todo": "코딩하기", "isComplete": false},
     {"id": 25, "date": new Date(2016, 4, 27), "todo": "웃기", "isComplete": false},
-    {"id": 26, "date": new Date(2016, 2, 4),  "todo": "노래하기", "isComplete": false}
+    {"id": 26, "date": new Date(2016, 2, 4),  "todo": "노래하기", "isComplete": false},
+
+    {"id": 27, "date": new Date(2016, 4, 2), "todo": "멍미", "isComplete": false},
+    {"id": 28, "date": new Date(2016, 4, 2), "todo": "ㅎㅎ", "isComplete": false},
+    {"id": 29, "date": new Date(2016, 4, 3), "todo": "ㅋㅋ", "isComplete": false},
+    {"id": 30, "date": new Date(2016, 3, 3), "todo": "ㄸ", "isComplete": false},
+    {"id": 31, "date": new Date(2016, 4, 4), "todo": "ㅆ", "isComplete": false},
+    {"id": 32, "date": new Date(2016, 5, 5), "todo": "ㅁㅁ", "isComplete": false},
+    {"id": 33, "date": new Date(2016, 4, 10),  "todo": "ㅗㅗ", "isComplete": false}
 ];

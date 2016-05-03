@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from 'angular2/core';
 
 import { MonthBoxComponent } from './month-box.component';
+import { TodoFormComponent } from './todo-form.component';
 import { CalendarService } from './calendar.service';
 import { TodoService } from './todo.service';
 
@@ -8,22 +9,34 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'my-calendar',
   template: `
-    <span> This is my Calendar!</span>
-    <div style="text-align:center;">
-      <div>
-        <h3>{{_year}} / {{_month}}</h3>
-        <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
-            <i class="fa fa-chevron-left"></i>before
-        </button>
-        <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
-            after<i class="fa fa-chevron-right"></i>
-        </button>
+    <div>
+      <div style="text-align:center;">
+        <todo-form (todoUpdate)="todoUpdate()"></todo-form>
       </div>
-      <my-month-box [monthArr]="_monthArr" ></my-month-box>
+      <div style="text-align:center;">
+        <div>
+          <div>
+            <h3>{{_year}} / {{_month}}</h3>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
+                <i class="fa fa-chevron-left"></i>before
+            </button>
+            <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
+              after<i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <my-month-box [monthArr]="_monthArr" ></my-month-box>
+      </div>
     </div>
   `,
   directives: [
-    MonthBoxComponent
+    MonthBoxComponent,
+    TodoFormComponent
   ],
   providers: [
     CalendarService
@@ -51,6 +64,11 @@ export class CalendarComponent implements OnInit{
 
   setCurrentDate(d:Date){
     this._calendarService.setCurrentDate(d);
+  }
+
+  todoUpdate(){
+    console.log(this._currentDate);
+    this.setCalendar(this.getCurrentDate());
   }
 
   setCalendar(d:Date){

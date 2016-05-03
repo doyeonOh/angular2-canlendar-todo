@@ -1,6 +1,10 @@
+ul{
+  padding:0;
+}
+
 ul.month_body li{
   float:left;
-  width:7em;
+  width:14.2857%;
   height:7em;
   border: 1px dotted black;
   text-overflow: ellipsis;
@@ -11,10 +15,9 @@ ul.month_body li{
 }
 ul.subject li{
   float:left;
-  width:7em;
+  width:14.2857%;
   height:2em;
   border: 0px;
-  text-align:center;
 }
 .day{
   cursor:pointer;

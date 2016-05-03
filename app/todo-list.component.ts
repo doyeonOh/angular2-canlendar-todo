@@ -26,7 +26,7 @@ export class TodoListComponent implements OnInit{
   @Input()
   showColor : boolean;
 
-  _todos : Todo[];
+  _todos : Todo[];;
 
   constructor(
     private _todoService: TodoService
@@ -39,8 +39,11 @@ export class TodoListComponent implements OnInit{
     this._todos = this._todoService.getTodosByDate(this.date);
   }
 
+  getTodos(){
+    return this._todoService.getTodosByDate(this.date);
+  }
   ngOnInit(){
-    this._todos = this._todoService.getTodosByDate(this.date);
+    this._todos = this.getTodos();
   }
 
 

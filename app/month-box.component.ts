@@ -11,7 +11,7 @@ import { TODOS } from './mock-todo';
 @Component({
   selector: 'my-month-box',
   template: `
-      <div style="display:inline-block;" class="month-box">
+      <div class="month-box">
         <ul class="subject">
           <li>일</li>
           <li>월</li>
