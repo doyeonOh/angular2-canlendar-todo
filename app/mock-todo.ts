@@ -26,3 +26,5 @@ export var TODOS: Todo[] = [
     {"id": 32, "date": new Date(2016, 5, 5), "todo": "ㅁㅁ", "isComplete": false},
     {"id": 33, "date": new Date(2016, 4, 10),  "todo": "ㅗㅗ", "isComplete": false}
 ];
+
+export var lastId = 33;

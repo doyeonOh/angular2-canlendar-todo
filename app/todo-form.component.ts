@@ -26,7 +26,7 @@ import { Todo } from './todo';
       <div class="form-group row">
         <label class="col-sm-2 form-control-label">Todo</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" (blur)="onBlur($event)" [value]="_todo.todo" placeholder="Todo를 입력하세요" />
+          <input type="text" class="form-control" (keyup)="onKeyup($event)" [value]="_todo.todo" placeholder="Todo를 입력하세요" />
         </div>
       </div>
       <div class="form-group row">
@@ -71,9 +71,8 @@ export class TodoFormComponent implements OnInit{
   }
 
   // ngModel 사용시 글이 중복되는 현상이 발생함...버그
-  onBlur(event){
+  onKeyup(event){
     this._todo.todo = event.target.value;
-
   }
 
   onSubmit(todoform:any){
@@ -101,7 +100,7 @@ export class TodoFormComponent implements OnInit{
   }
 
   showAlert(type:string, msg:string){
-    this._alertMsg = msg;
+    this._alertMsg  = msg;
     this._alertType = type;
     this._showAlert = true;
     setTimeout(()=> this._showAlert = false, 3000);
