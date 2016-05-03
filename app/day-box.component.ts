@@ -9,7 +9,7 @@ import { Todo } from './todo';
     <div>
       <my-todo-list
         [date]="date"
-        [showColor]="showColor">
+        [showType]="'color'">
       </my-todo-list>
     </div>
   `,
@@ -18,11 +18,8 @@ import { Todo } from './todo';
 
 export class DayBoxComponent implements OnInit{
   @Input()
-  showColor : boolean;
-  @Input()
   date: Date;
 
   ngOnInit(){
-    // console.log(this.date);
   }
 }

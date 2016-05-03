@@ -1,17 +1,15 @@
-ul{
-  padding:0;
-}
-
 ul.month_body li{
   float:left;
   width:14.2857%;
   height:7em;
   border: 1px dotted black;
+  border-radius: 0.3em;
   text-overflow: ellipsis;
   word-wrap:normal;
   white-space: nowrap;
   overflow: hidden;
   overflow-y:hidden;
+  padding-left: 0.3em;
 }
 ul.subject li{
   float:left;
@@ -32,5 +30,5 @@ ul.subject li{
   background-color: #BBD8DC !important;
 }
 .today{
-  background-color: #CCA3FA !important;
+  background-color: #FFFFAF !important;
 }

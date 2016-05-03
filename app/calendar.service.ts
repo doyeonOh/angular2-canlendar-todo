@@ -3,43 +3,38 @@ import { Injectable } from 'angular2/core';
 
 @Injectable()
 export class CalendarService {
-  _weekDay: number = 7;
+  _lenthOfWeek: number = 7;
   _monthArr: number[][];
 
   _currentDate: Date;
-
 
   getToday() {
     return new Date();
   }
 
-  getTotalWeekOfMonth(endDate:number, startDayOfWeek:number){
-    var totalWeek = Math.floor((endDate + startDayOfWeek) / this._weekDay);
-    var adder = (endDate + startDayOfWeek) % this._weekDay;
+  getWeekOfMonth(endDate:number, startDayOfFirstWeek:number){
+    var weekOfMonth = Math.floor((endDate + startDayOfFirstWeek) / this._lenthOfWeek);
+    var adder = (endDate + startDayOfFirstWeek) % this._lenthOfWeek;
 
     if(adder > 0)
-      totalWeek = totalWeek + 1;
+      weekOfMonth = weekOfMonth + 1;
 
-    return totalWeek;
+    return weekOfMonth;
   }
-
+  
   getMonthArray(d:Date){
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
-    var date = d.getDate();
-    var startDayOfWeek = new Date(year, month - 1, 1).getDay(); // 1일의 요일 반환
-    var endDate = new Date(year, month, 0).getDate(); // 마지막 일의 요일 반환 ( 0 으로 넣으면 전달의 마지막 날 나옴)
-
-    var totalWeekOfMonth = this.getTotalWeekOfMonth(endDate, startDayOfWeek);
-
+    var startDayOfFirstWeek = new Date(year, month - 1, 1).getDay(); // 1일의 요일 반환
     var startDate = 1;
-
+    var endOfDate = new Date(year, month, 0).getDate(); // 마지막 일 반환 ( 0 으로 넣으면 전달의 마지막 날 나옴)
+    var weekOfMonth = this.getWeekOfMonth(endOfDate, startDayOfFirstWeek);
     var monthArr = [];
 
-    for(let i = 0; i < totalWeekOfMonth; i++){
+    for(let i = 0; i < weekOfMonth; i++){
       monthArr[i] = [];
-      for(let j = 0; j < this._weekDay; j++){
-        if(!(i == 0 && startDayOfWeek > j || startDate > endDate)){
+      for(let j = 0; j < this._lenthOfWeek; j++){
+        if(!(i == 0 && startDayOfFirstWeek > j || startDate > endOfDate)){
           monthArr[i][j] = startDate;
           startDate++;
         }else{

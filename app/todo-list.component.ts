@@ -7,11 +7,11 @@ import { Todo } from './todo';
 @Component({
   selector: 'my-todo-list',
   template: `
-    <ul style="padding:0;">
+    <ul>
       <li *ngFor="#todo of _todos" >
-        <my-todo [todo]= "todo" [showColor]="showColor" > </my-todo>
+        <my-todo [todo]= "todo" [showType]="showType"> </my-todo>
       </li>
-      <span *ngIf="showColor == false && _todos.length == 0">Todo가 없습니다</span>
+      <span *ngIf="showType == 'checkbox' && _todos.length == 0">Todo가 없습니다</span>
     </ul>
   `,
 
@@ -24,24 +24,26 @@ export class TodoListComponent implements OnInit{
   @Input()
   date:Date;
   @Input()
-  showColor : boolean;
+  showType : string;
 
-  _todos : Todo[];;
+  _todos : Todo[];
+
 
   constructor(
     private _todoService: TodoService
   ) {}
 
 
-  refresh(date:Date, showColor:boolean){
+  refresh(date:Date, showType:string){
     this.date = date;
-    this.showColor = showColor;
-    this._todos = this._todoService.getTodosByDate(this.date);
+    this.showType = showType;
+    this._todos = this.getTodos();
   }
 
   getTodos(){
     return this._todoService.getTodosByDate(this.date);
   }
+
   ngOnInit(){
     this._todos = this.getTodos();
   }

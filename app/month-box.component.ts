@@ -22,14 +22,14 @@ import { TODOS } from './mock-todo';
           <li>토</li>
         </ul>
         <ul *ngFor="#week of monthArr" class="month_body">
-          <li *ngFor="#day of week" class="day"  (click)="showModal(day,modal,mytodolist)">
+          <li *ngFor="#day of week" class="day"  (click)="showModal(day,modal,mytodolist)" [class.today]="isToday(day)">
             <span class="day"
               [class.day_sun]="week[0] == day"
               [class.day_sat]="week[6] == day"
-              [class.today]="isToday(day)">
+              >
               {{day}}
             </span>
-            <my-day-box [date]=getDate(day) [showColor]="true"></my-day-box>
+            <my-day-box [date]=getDate(day) ></my-day-box>
           </li>
         </ul>
       </div>
@@ -39,8 +39,6 @@ import { TODOS } from './mock-todo';
           [closeOnUnfocus]="true" style="text-align:initial;">
           <div class="modal-body" >
               <my-todo-list #mytodolist>
-                [(date)]="_date"
-                [showColor]="false"
               </my-todo-list>
           </div>
           <div class="modal-footer">
@@ -59,6 +57,8 @@ export class MonthBoxComponent implements OnInit{
   @Input()
   monthArr: number[][];
 
+  _isCheckbox : string = "checkbox";
+
   _date: Date;
 
   constructor(
@@ -73,7 +73,7 @@ export class MonthBoxComponent implements OnInit{
   showModal(day:number, modal:any, mytodolist:any){
     this._date = this.getDate(day);
     modal.modalTitle = this.getModalTitle();
-    mytodolist.refresh(this._date, false);
+    mytodolist.refresh(this._date, this._isCheckbox);
     return day > 0 ? modal.showModal() : '';
   }
 
