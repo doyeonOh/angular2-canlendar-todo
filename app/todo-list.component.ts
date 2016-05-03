@@ -9,7 +9,7 @@ import { Todo } from './todo';
   template: `
     <ul>
       <li *ngFor="#todo of _todos" >
-        <my-todo [todo]= "todo" [showType]="showType"> </my-todo>
+        <my-todo [todo]= "todo" [showType]="showType" (todoDeleted)="todoDeletedCallback()"> </my-todo>
       </li>
       <span *ngIf="showType == 'checkbox' && _todos.length == 0">Todo가 없습니다</span>
     </ul>
@@ -27,12 +27,14 @@ export class TodoListComponent implements OnInit{
   showType : string;
 
   _todos : Todo[];
-
-
+  
   constructor(
     private _todoService: TodoService
   ) {}
 
+  todoDeletedCallback(){
+    this.refresh(this.date, this.showType);
+  }
 
   refresh(date:Date, showType:string){
     this.date = date;
@@ -47,6 +49,4 @@ export class TodoListComponent implements OnInit{
   ngOnInit(){
     this._todos = this.getTodos();
   }
-
-
 }
