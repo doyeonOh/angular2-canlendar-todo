@@ -16,17 +16,15 @@ import { TodoService } from './todo.service';
         </div>
         <div>
           <div>
-            <div>
-              <h3>{{_year}} / {{_month}}</h3>
-            </div>
-            <div>
-              <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
-                  <i class="fa fa-chevron-left"></i> 이전달
-              </button>
-              <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
-                다음달 <i class="fa fa-chevron-right"></i>
-              </button>
-            </div>
+            <h3>{{_year}} / {{_month}}</h3>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
+                <i class="fa fa-chevron-left"></i> 이전달
+            </button>
+            <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
+              다음달 <i class="fa fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>

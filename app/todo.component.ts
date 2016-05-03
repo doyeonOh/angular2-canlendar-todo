@@ -14,7 +14,7 @@ import { Todo } from './todo';
     <span class="input-group-addon">X</span>
   </div>
   <div *ngIf="_isColor">
-    <span *ngIf="todo" [ngClass]="{'alert-success': todo.isComplete === true,'alert-danger': todo.isComplete === false }">{{ todo.todo }}</span>
+    <span *ngIf="todo" class="todo_color" [ngClass]="{'success': todo.isComplete === true,'fail': todo.isComplete === false }">{{ todo.todo }}</span>
   </div>
   `,
   styles: [`
@@ -23,6 +23,17 @@ import { Todo } from './todo';
     }
     label{
       cursor: pointer;
+    }
+    .todo_color{
+      padding: 0.2em 0.3em 0.2em 0.3em;
+      border-radius: 0.2em;
+    }
+    .success{
+      background-color: #cFFFcF;
+    }
+    .fail{
+      background-color: #FFcFcF;
+
     }
   `]
 })

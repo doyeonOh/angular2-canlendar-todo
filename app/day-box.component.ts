@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
 
 import { TodoListComponent } from './todo-list.component';
-import { Todo } from './todo';
 
 @Component({
   selector: 'my-day-box',
@@ -9,17 +8,16 @@ import { Todo } from './todo';
     <div>
       <my-todo-list
         [date]="date"
-        [showType]="'color'">
+        [showType]="_dayBoxShowType">
       </my-todo-list>
     </div>
   `,
   directives: [TodoListComponent]
 })
 
-export class DayBoxComponent implements OnInit{
+export class DayBoxComponent{
   @Input()
   date: Date;
 
-  ngOnInit(){
-  }
+  _dayBoxShowType : string = "color";
 }
