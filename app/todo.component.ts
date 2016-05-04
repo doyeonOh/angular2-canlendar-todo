@@ -1,5 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from 'angular2/core';
-import { RouteParams } from 'angular2/router';
+import { Component, Input } from 'angular2/core';
 
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
@@ -8,7 +7,7 @@ import { TodoService } from './todo.service';
   selector: 'my-todo',
   template: `
     <div *ngIf="todo">
-      <div *ngIf="_isCheckbox" class="input-group">
+      <div *ngIf="showType == 'checkbox'" class="input-group">
         <span class="input-group-addon">
         <input #todo_checkbox id="{{'todo_checkbox' + todo.id }}" type='checkbox' [checked] = "todo.isComplete" (change)="onCheckChange($event)"> </span>
         <label [attr.for]="todo_checkbox.id" class="form-control"
@@ -16,7 +15,7 @@ import { TodoService } from './todo.service';
         <span class="input-group-addon todo_delete" (click)="onDeleteTodo($event)">X</span>
       </div>
 
-      <div *ngIf="_isColor">
+      <div *ngIf="showType == 'color'">
         <span *ngIf="todo" class="todo_color" [ngClass]="{'success': todo.isComplete === true,'fail': todo.isComplete === false }">{{ todo.todo }}</span>
       </div>
     </div>
@@ -43,17 +42,11 @@ import { TodoService } from './todo.service';
   `]
 })
 
-export class TodoComponent implements OnInit {
+export class TodoComponent{
   @Input()
   todo: Todo;
   @Input()
   showType: string;
-
-  @Output()
-  todoDeleted = new EventEmitter<any>();
-
-  _isColor : boolean = false;
-  _isCheckbox : boolean = false;
 
   constructor(
     private _todoService: TodoService
@@ -65,16 +58,6 @@ export class TodoComponent implements OnInit {
   }
 
   onDeleteTodo(event){
-    event.srcElement.parentNode.remove();
     this._todoService.deleteTodo(this.todo);
-    this.todoDeleted.next(null);
-  }
-
-  ngOnInit() {
-    if(this.showType == "color"){
-      this._isColor = true;
-    }else if(this.showType == "checkbox"){
-      this._isCheckbox = true;
-    }
   }
 }

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from 'angular2/core';
 
+import { Alert } from 'fuel-ui/fuel-ui';
+
 import { MonthBoxComponent } from './month-box.component';
 import { TodoFormComponent } from './todo-form.component';
 import { CalendarService } from './calendar.service';
@@ -12,7 +14,12 @@ import { TodoService } from './todo.service';
     <div>
       <div style="text-align:center;">
         <div>
-          <todo-form (todoUpdate)="todoUpdateCallback()"></todo-form>
+          <alert [(displayed)]="_alertObj.show" [type]="_alertObj.type" [closeButton]="true">
+            {{ _alertObj.msg }}
+          </alert>
+        </div>
+        <div>
+          <todo-form (alertTrigger)="onAlertTrigger($event)"></todo-form>
         </div>
         <div>
           <div>
@@ -35,7 +42,8 @@ import { TodoService } from './todo.service';
   `,
   directives: [
     MonthBoxComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    Alert
   ],
   providers: [
     CalendarService
@@ -49,10 +57,25 @@ export class CalendarComponent implements OnInit{
   _year: number;
   _month: number;
 
+  _alertObj = {
+    "show" : false,
+    "type" : "",
+    "msg"  : ""
+  };
+
   constructor(
     private _calendarService: CalendarService,
     private _todoService: TodoService
   ) {}
+
+  onAlertTrigger(alertObj){
+    this._alertObj = {
+      type: alertObj.type,
+      msg : alertObj.msg,
+      show : true
+    };
+    setTimeout(()=>{ this._alertObj.show = false;}, 3000);
+  }
 
   getTodayDate(){
     return this._calendarService.getToday();
@@ -60,10 +83,6 @@ export class CalendarComponent implements OnInit{
 
   setCurrentDate(d:Date){
     this._calendarService.setCurrentDate(d);
-  }
-
-  todoUpdateCallback(){
-    this.setCalendar(this.getCurrentDate());
   }
 
   setCalendar(d:Date){
@@ -88,5 +107,4 @@ export class CalendarComponent implements OnInit{
     this.setCalendar(this.getTodayDate());
     this.setCurrentDate(this.getTodayDate());
   }
-
 }

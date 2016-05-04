@@ -1,7 +1,6 @@
 import { Component, Output, OnInit, EventEmitter } from 'angular2/core';
 
 import { DatePicker } from 'fuel-ui/fuel-ui';
-import { Alert } from 'fuel-ui/fuel-ui';
 
 import { TodoService } from './todo.service';
 import { Todo } from './todo';
@@ -10,9 +9,6 @@ import { Todo } from './todo';
   selector: 'todo-form',
   template: `
   <div class="todo-form-container">
-    <alert [(displayed)]="_showAlert" [type]="_alertType" [closeButton]="true">
-      {{ _alertMsg }}
-    </alert>
     <form (ngSubmit)="onSubmit(todoform)" #todoform>
       <div class="form-group row">
         <label class="col-sm-2 form-control-label">날짜</label>
@@ -46,20 +42,16 @@ import { Todo } from './todo';
 
   `],
   directives : [
-    DatePicker,
-    Alert
+    DatePicker
   ]
 })
 
 export class TodoFormComponent implements OnInit{
   _datePickerValue : Date;
   _todo : Todo;
-  _showAlert : boolean = false;
-  _alertMsg : string;
-  _alertType : string;
 
   @Output()
-  todoUpdate = new EventEmitter<any>();
+  alertTrigger = new EventEmitter();
 
 
   constructor(
@@ -81,7 +73,6 @@ export class TodoFormComponent implements OnInit{
     if(!this.checkValidTodo(this._todo)) return ;
     this.addTodo(this._todo);
     this.showAlert("success", "성공적으로 등록되었습니다");
-    this.todoUpdate.next(null);  // 부모로 보내는 event trigger
     this.makeNewTodo();
   }
 
@@ -93,17 +84,18 @@ export class TodoFormComponent implements OnInit{
 
     if(!(todo.date instanceof Date)){
       this.showAlert("danger", "날짜를 선택해주세요");
-      console.log(todo.date);
       return false;
     }
     return true;
   }
 
   showAlert(type:string, msg:string){
-    this._alertMsg  = msg;
-    this._alertType = type;
-    this._showAlert = true;
-    setTimeout(()=> this._showAlert = false, 3000);
+    var alertObj = {
+      type: type,
+      msg: msg
+    };
+
+    this.alertTrigger.emit(alertObj); //  parameter 와 함께 상위로 emit
   }
 
   addTodo(todo: Todo){
