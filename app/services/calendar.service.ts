@@ -3,25 +3,25 @@ import { Injectable } from 'angular2/core';
 
 @Injectable()
 export class CalendarService {
-  _lenthOfWeek: number = 7;
-  _monthArr: number[][];
+  lenthOfWeek: number = 7;
+  monthArr: number[][];
 
-  _currentDate: Date;
+  currentDate: Date;
 
   getToday() {
     return new Date();
   }
 
   getWeekOfMonth(endDate:number, startDayOfFirstWeek:number){
-    var weekOfMonth = Math.floor((endDate + startDayOfFirstWeek) / this._lenthOfWeek);
-    var adder = (endDate + startDayOfFirstWeek) % this._lenthOfWeek;
+    var weekOfMonth = Math.floor((endDate + startDayOfFirstWeek) / this.lenthOfWeek);
+    var adder = (endDate + startDayOfFirstWeek) % this.lenthOfWeek;
 
     if(adder > 0)
       weekOfMonth = weekOfMonth + 1;
 
     return weekOfMonth;
   }
-  
+
   getMonthArray(d:Date){
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
@@ -33,7 +33,7 @@ export class CalendarService {
 
     for(let i = 0; i < weekOfMonth; i++){
       monthArr[i] = [];
-      for(let j = 0; j < this._lenthOfWeek; j++){
+      for(let j = 0; j < this.lenthOfWeek; j++){
         if(!(i == 0 && startDayOfFirstWeek > j || startDate > endOfDate)){
           monthArr[i][j] = startDate;
           startDate++;
@@ -43,7 +43,7 @@ export class CalendarService {
       }
     }
 
-    this._monthArr = monthArr;
+    this.monthArr = monthArr;
 
     return monthArr;
   }
@@ -51,23 +51,23 @@ export class CalendarService {
   getPrevMonthDate(d:Date){
     var prevMonthDate = d;
     prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-    this._currentDate = prevMonthDate;
+    this.currentDate = prevMonthDate;
     return prevMonthDate;
   }
 
   getNextMonthDate(d:Date){
     var nextMonthDate = d;
     nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-    this._currentDate = nextMonthDate;
+    this.currentDate = nextMonthDate;
     return nextMonthDate;
   }
 
   getCurrentDate(){
-    return this._currentDate;
+    return this.currentDate;
   }
 
   setCurrentDate(d:Date){
-    this._currentDate = d;
+    this.currentDate = d;
   }
 
   isSameDate(d1:Date, d2:Date){

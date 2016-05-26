@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core';
 
-import { Todo } from './todo';
-import { lastId, TODOS } from './mock-todo';
+import { Todo } from '../models/todo';
+import { lastId, TODOS } from '../mock/mock-todo';
 
 
 @Injectable()

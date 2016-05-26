@@ -1,0 +1,24 @@
+<div class="todo-form-container">
+  <form (ngSubmit)="onSubmit(todoform)" #todoform>
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label">날짜</label>
+      <div class="col-sm-9">
+        <date-picker #picker
+          label="날짜를 선택하세요"
+          (valueChange)="changeDatePickerValue(picker.selectedDate)">
+        </date-picker>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label">Todo</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" (keyup)="onKeyup($event)" [value]="_todo.todo" placeholder="Todo를 입력하세요" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-11" style="text-align:right;">
+        <input type="submit" class="btn btn-default" value="추가하기" />
+      </div>
+    </div>
+  </form>
+</div>

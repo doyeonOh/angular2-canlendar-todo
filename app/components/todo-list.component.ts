@@ -1,8 +1,8 @@
 import { Component, Input } from 'angular2/core';
 
-import { TodoService } from './todo.service';
+import { TodoService } from '../services/todo.service';
 import { TodoComponent } from './todo.component';
-import { Todo } from './todo';
+import { Todo } from '../models/todo';
 
 @Component({
   selector: 'my-todo-list',

@@ -1,0 +1,28 @@
+<div>
+  <div style="text-align:center;">
+    <div>
+      <alert [(displayed)]="_alertObj.show" [type]="_alertObj.type" [closeButton]="true">
+        {{ _alertObj.msg }}
+      </alert>
+    </div>
+    <div>
+      <todo-form (alertTrigger)="onAlertTrigger($event)"></todo-form>
+    </div>
+    <div>
+      <div>
+        <h3>{{_year}} / {{_month}}</h3>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
+            <i class="fa fa-chevron-left"></i> 이전달
+        </button>
+        <button type="button" class="btn btn-primary" (click)="moveToNextMonth(getCurrentDate())">
+          다음달 <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <my-month-box [monthArr]="_monthArr" ></my-month-box>
+  </div>
+</div>

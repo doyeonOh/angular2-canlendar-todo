@@ -1,4 +1,4 @@
-import {Todo} from './todo';
+import {Todo} from '../models/todo';
 
 export var TODOS: Todo[] = [
     {"id": 11, "date": new Date(2016, 3, 26), "todo": "일하기", "isComplete": true},

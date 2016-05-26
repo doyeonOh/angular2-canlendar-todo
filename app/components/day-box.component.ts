@@ -8,7 +8,7 @@ import { TodoListComponent } from './todo-list.component';
     <div>
       <my-todo-list
         [date]="date"
-        [showType]="_dayBoxShowType">
+        [showType]="dayBoxShowType">
       </my-todo-list>
     </div>
   `,
@@ -19,5 +19,5 @@ export class DayBoxComponent{
   @Input()
   date: Date;
 
-  _dayBoxShowType : string = "color";
+  dayBoxShowType : string = "color";
 }

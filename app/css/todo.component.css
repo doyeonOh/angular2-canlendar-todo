@@ -1,0 +1,18 @@
+label{
+  cursor: pointer;
+}
+.todo_color{
+  padding: 0.2em 0.3em 0.2em 0.3em;
+  border-radius: 0.2em;
+}
+.todo_delete{
+  cursor:pointer;
+}
+.success{
+  background-color: #cFFFcF;
+  text-decoration : line-through;
+}
+.fail{
+  background-color: #FFcFcF;
+
+}

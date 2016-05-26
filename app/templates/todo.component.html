@@ -1,0 +1,13 @@
+<div *ngIf="todo">
+  <div *ngIf="showType == 'checkbox'" class="input-group">
+    <span class="input-group-addon">
+    <input #todo_checkbox id="{{'todo_checkbox' + todo.id }}" type='checkbox' [checked] = "todo.isComplete" (change)="onCheckChange($event)"> </span>
+    <label [attr.for]="todo_checkbox.id" class="form-control"
+      [ngClass]="{'success': todo_checkbox.checked, 'fail': !todo_checkbox.checked }">{{ todo.todo }}</label>
+    <span class="input-group-addon todo_delete" (click)="onDeleteTodo($event)">X</span>
+  </div>
+
+  <div *ngIf="showType == 'color'">
+    <span *ngIf="todo" class="todo_color" [ngClass]="{'success': todo.isComplete === true,'fail': todo.isComplete === false }">{{ todo.todo }}</span>
+  </div>
+</div>

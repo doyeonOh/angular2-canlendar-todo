@@ -1,0 +1,36 @@
+<div class="month-box">
+  <ul class="subject">
+    <li>일</li>
+    <li>월</li>
+    <li>화</li>
+    <li>수</li>
+    <li>목</li>
+    <li>금</li>
+    <li>토</li>
+  </ul>
+  <ul *ngFor="#week of monthArr" class="month_body">
+    <li *ngFor="#day of week" class="day"  (click)="showModal(day,modal,mytodolist)" [class.today]="isToday(day)">
+      <span class="day"
+        [class.day_sun]="week[0] == day"
+        [class.day_sat]="week[6] == day"
+        >
+        {{day}}
+      </span>
+      <my-day-box [date]=getDate(day) ></my-day-box>
+    </li>
+  </ul>
+</div>
+<modal #modal
+    modalTitle="Modal Title"
+    [closeButton]="true"
+    [closeOnUnfocus]="true" style="text-align:initial;">
+    <div class="modal-body" >
+        <my-todo-list #mytodolist>
+        </my-todo-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.closeModal()">
+            <i class="fa fa-chevron-left"></i> Go Back
+        </button>
+    </div>
+</modal>
