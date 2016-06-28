@@ -1,8 +1,8 @@
 <div>
   <div style="text-align:center;">
     <div>
-      <alert [(displayed)]="_alertObj.show" [type]="_alertObj.type" [closeButton]="true">
-        {{ _alertObj.msg }}
+      <alert [(displayed)]="alertObj.show" [type]="alertObj.type" [closeButton]="true">
+        {{ alertObj.msg }}
       </alert>
     </div>
     <div>
@@ -10,7 +10,7 @@
     </div>
     <div>
       <div>
-        <h3>{{_year}} / {{_month}}</h3>
+        <h3>{{year}} / {{month}}</h3>
       </div>
       <div>
         <button type="button" class="btn btn-primary" (click)="moveToPrevMonth(getCurrentDate())">
@@ -23,6 +23,6 @@
     </div>
   </div>
   <div>
-    <my-month-box [monthArr]="_monthArr" ></my-month-box>
+    <my-month-box [monthArr]="monthArr" ></my-month-box>
   </div>
 </div>
