@@ -1,6 +1,6 @@
-import { Component, Output, OnInit, EventEmitter } from 'angular2/core';
+import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 
-import { DatePicker } from 'fuel-ui/fuel-ui';
+import {DATE_PICKER_PROVIDERS} from 'fuel-ui/fuel-ui';
 
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../models/todo';
@@ -17,7 +17,7 @@ import { Todo } from '../models/todo';
 
   `],
   directives : [
-    DatePicker
+    DATE_PICKER_PROVIDERS
   ]
 })
 

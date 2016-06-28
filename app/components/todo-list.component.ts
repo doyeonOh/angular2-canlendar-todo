@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input } from '@angular/core';
 
 import { TodoService } from '../services/todo.service';
 import { TodoComponent } from './todo.component';
@@ -8,7 +8,7 @@ import { Todo } from '../models/todo';
   selector: 'my-todo-list',
   template: `
     <ul>
-      <li *ngFor="#todo of getTodos()" >
+      <li *ngFor="let todo of getTodos()" >
         <my-todo [todo]= "todo" [showType]="showType"> </my-todo>
       </li>
       <span *ngIf="showType == 'checkbox' && getTodos().length == 0">Todo가 없습니다</span>

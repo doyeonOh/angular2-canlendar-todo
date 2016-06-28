@@ -6,6 +6,9 @@
         <date-picker #picker
           label="날짜를 선택하세요"
           (valueChange)="changeDatePickerValue(picker.selectedDate)">
+          <div class="date-picker-input-group">
+            <input name="date" dateField class="form-control" value="" placeholder="pick a date" />
+        </div>
         </date-picker>
       </div>
     </div>

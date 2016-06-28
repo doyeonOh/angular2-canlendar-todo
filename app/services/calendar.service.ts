@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 
 
 @Injectable()
@@ -8,6 +8,8 @@ export class CalendarService {
 
   currentDate: Date;
 
+  year : string;
+  month: string;
   getToday() {
     return new Date();
   }

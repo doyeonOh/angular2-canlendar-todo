@@ -8,8 +8,8 @@
     <li>금</li>
     <li>토</li>
   </ul>
-  <ul *ngFor="#week of monthArr" class="month_body">
-    <li *ngFor="#day of week" class="day"  (click)="showModal(day,modal,mytodolist)" [class.today]="isToday(day)">
+  <ul *ngFor="let week of monthArr" class="month_body">
+    <li *ngFor="let day of week" class="day"  (click)="showModal(day,modal,mytodolist)" [class.today]="isToday(day)">
       <span class="day"
         [class.day_sun]="week[0] == day"
         [class.day_sat]="week[6] == day"

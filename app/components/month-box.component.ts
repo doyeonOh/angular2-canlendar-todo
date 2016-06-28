@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from 'angular2/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Modal } from 'fuel-ui/fuel-ui';
 
 import { TodoService } from '../services/todo.service';
